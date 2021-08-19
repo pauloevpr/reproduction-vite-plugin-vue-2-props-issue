@@ -1,11 +1,10 @@
-﻿<template>
+<template>
   <div>
     <span>{{ someValue}}</span>
   </div>
 </template>
 <script lang="ts">
-import {Component, Prop} from 'vue-property-decorator';
-import Vue from 'vue';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 
 class TestClass {
   constructor(value: string) {
@@ -13,14 +12,10 @@ class TestClass {
   }
 }
 
-@Component({
-  props: {
-    someValue: { type: String, required: true }
-  }
-})
+@Component
 class ChildComponent extends Vue {
   @Prop({required: true, type: String}) someValue!: string;
-  _ = new TestClass(this.someValue);
+  dataField = new TestClass(this.someValue);
 
   beforeMount() {
     console.log(`value beforeMount: ${this.someValue}`)
